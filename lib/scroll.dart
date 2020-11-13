@@ -6,19 +6,9 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 const numberOfItems = 5001;
 const minItemHeight = 20.0;
 const maxItemHeight = 150.0;
-const scrollDuration = Duration(seconds: 2);
+const scrollDuration = Duration(seconds: 1);
 
-/// Example widget that uses [ScrollablePositionedList].
-///
-/// Shows a [ScrollablePositionedList] along with the following controls:
-///   - Buttons to jump or scroll to certain items in the list.
-///   - Slider to control the alignment of the items being scrolled or jumped
-///   to.
-///   - A checkbox to reverse the list.
-///
-/// If the device this example is being used on is in portrait mode, the list
-/// will be vertically scrollable, and if the device is in landscape mode, the
-/// list will be horizontally scrollable.
+
 class ScrollablePositionedListPage extends StatefulWidget {
   const ScrollablePositionedListPage({Key key}) : super(key: key);
 
@@ -27,26 +17,23 @@ class ScrollablePositionedListPage extends StatefulWidget {
       _ScrollablePositionedListPageState();
 }
 
-class _ScrollablePositionedListPageState
-    extends State<ScrollablePositionedListPage> {
+class _ScrollablePositionedListPageState extends State<ScrollablePositionedListPage> {
   /// Controller to scroll or jump to a particular item.
   final ItemScrollController itemScrollController = ItemScrollController();
 
   /// Listener that reports the position of items when the list is scrolled.
-  final ItemPositionsListener itemPositionsListener =
-  ItemPositionsListener.create();
+  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
   List<double> itemHeights;
   List<Color> itemColors;
-  bool reversed = false;
 
   /// The alignment to be used next time the user scrolls or jumps to an item.
-  double alignment = 0;
+  double alignment = 0.5;
 
   @override
   void initState() {
     super.initState();
     final heightGenerator = Random(328902348);
-    final colorGenerator = Random(42490823);
+    final colorGenerator = Random(1);
     itemHeights = List<double>.generate(
         numberOfItems,
             (int _) =>
@@ -59,29 +46,31 @@ class _ScrollablePositionedListPageState
   }
 
   @override
-  Widget build(BuildContext context) => Material(
-    child: OrientationBuilder(
-      builder: (context, orientation) => Column(
-        children: <Widget>[
-          Expanded(
-            child: list(orientation),
-          ),
-          positionsView,
-          Row(
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  scrollControlButtons,
-                  jumpControlButtons,
-                  alignmentControl,
-                ],
-              ),
-            ],
-          )
-        ],
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: list(),
+            ),
+            positionsView,
+            Row(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    scrollControlButtons,
+                    jumpControlButtons,
+                    alignmentControl,
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   Widget get alignmentControl => Row(
     mainAxisSize: MainAxisSize.max,
@@ -97,16 +86,16 @@ class _ScrollablePositionedListPageState
     ],
   );
 
-  Widget list(Orientation orientation) => ScrollablePositionedList.builder(
-    itemCount: numberOfItems,
-    itemBuilder: (context, index) => item(index, orientation),
-    itemScrollController: itemScrollController,
-    itemPositionsListener: itemPositionsListener,
-    reverse: reversed,
-    scrollDirection: orientation == Orientation.portrait
-        ? Axis.vertical
-        : Axis.horizontal,
-  );
+  Widget list() {
+    return ScrollablePositionedList.builder(
+          itemCount: numberOfItems,
+          itemBuilder: (context, index) => item(index),
+          itemScrollController: itemScrollController,
+          itemPositionsListener: itemPositionsListener,
+          scrollDirection: Axis.vertical
+
+      );
+  }
 
   Widget get positionsView => ValueListenableBuilder<Iterable<ItemPosition>>(
     valueListenable: itemPositionsListener.itemPositions,
@@ -139,12 +128,6 @@ class _ScrollablePositionedListPageState
         children: <Widget>[
           Expanded(child: Text('First Item: ${min ?? ''}')),
           Expanded(child: Text('Last Item: ${max ?? ''}')),
-          const Text('Reversed: '),
-          Checkbox(
-              value: reversed,
-              onChanged: (bool value) => setState(() {
-                reversed = value;
-              }))
         ],
       );
     },
@@ -196,14 +179,11 @@ class _ScrollablePositionedListPageState
       curve: Curves.easeInOutCubic,
       alignment: alignment);
 
-  void jumpTo(int index) =>
-      itemScrollController.jumpTo(index: index, alignment: alignment);
+  void jumpTo(int index) => itemScrollController.jumpTo(index: index, alignment: alignment);
 
-  /// Generate item number [i].
-  Widget item(int i, Orientation orientation) {
+  Widget item(int i) {
     return SizedBox(
-      height: orientation == Orientation.portrait ? itemHeights[i] : null,
-      width: orientation == Orientation.landscape ? itemHeights[i] : null,
+      height: i%2==0?100:50,
       child: Container(
         color: itemColors[i],
         child: Center(
