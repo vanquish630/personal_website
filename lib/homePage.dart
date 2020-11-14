@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           icon: Icon(Icons.menu),
           onPressed: (){
             setState(() {
-              menuHeight==0?menuHeight=width*0.2:menuHeight=0;
+              menuHeight==0?menuHeight=width*0.4:menuHeight=0;
             });
             print(menuHeight);
           },
@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           child: Column(
             children: [
           AnimatedContainer(
-          duration: Duration(milliseconds: 100),
-        width: MediaQuery.of(context).size.width,
-        height: menuHeight,
-        color: headerColor,
-      ),
+            duration: Duration(milliseconds: 100),
+            width: MediaQuery.of(context).size.width,
+            height: menuHeight,
+            color: headerColor,
+          ),
               Header(),
             ],
           )

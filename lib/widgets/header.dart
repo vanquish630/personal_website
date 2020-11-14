@@ -19,17 +19,21 @@ class _HeaderState extends State<Header> {
     return Stack(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(right: 36),
+         // padding: EdgeInsets.only(right: 36),
           alignment: Alignment.topCenter,
           height: height,
           //currentScreenType == "small"?300:currentScreenType == "medium"?350:400,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              color: headerColor,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/headerPortfolio.png",),
-              )),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    width: 0, color: headerColor),
+                color: headerColor,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/headerTransparent.png",),
+                )),
+
+
         ),
         Positioned(
           top: height*0.3,
