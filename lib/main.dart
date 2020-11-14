@@ -4,6 +4,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_website/homePage.dart';
 import 'package:personal_website/scroll.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage()/*MyHomePage(title: 'Scroll To Index Demo')*/,
+      home: HomePage()/*MyHomePage(title: 'Scroll To Index Demo')*/,
     );
   }
 }
@@ -93,7 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   padding: EdgeInsets.only(right: 36),
                   alignment: Alignment.topCenter,
-                  height: currentScreenType == "small"?300:currentScreenType == "medium"?350:400,
+                  height: math.min(MediaQuery.of(context).size.width/2,450),
+                  //currentScreenType == "small"?300:currentScreenType == "medium"?350:400,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: Colors.grey,
@@ -114,9 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           padding: EdgeInsets.all(0),
 
-                          child: Text("hello",style: TextStyle(
+                          child: Text("Hello,",style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16
+                            fontSize: 18
                           ),),
                         ),
 
