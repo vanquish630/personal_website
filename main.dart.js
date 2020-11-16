@@ -46259,7 +46259,7 @@ else{q=P.bF(0,100)
 p=F.aK(b,!1).a
 o=k.d
 n=F.Zv(C.bR,0)
-m=Math.min(F.aK(b,!1).a.a/2,500)
+m=Math.max(F.aK(b,!1).a.a/2,300)
 l=k.d
 l=M.bs(j,M.bs(j,new A.oN(new D.SM(),j),C.k,j,j,j,j,j,j,j,j,j,j),C.k,j,j,j,j,j,j,new V.az(16,m*0.2,24,l*0.05),j,j,j)
 p=S.j4(o,p.a)
@@ -46313,9 +46313,9 @@ P.eT("constraints"+H.b(p))
 p*=0.24
 s=Math.min(p,F.aK(a,!1).a.a*0.05)
 s=M.bs(q,T.jh(L.k6("About".toUpperCase(),A.dY(q,q,C.j,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q))),C.k,q,q,q,q,s,q,new V.az(0,0,0,0),q,q,q)
-r=Math.min(p,F.aK(a,!1).a.a*0.1)
+r=Math.min(p,F.aK(a,!1).a.a*0.05)
 r=M.bs(q,T.jh(L.k6("projects".toUpperCase(),A.dY(q,q,C.j,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q))),C.k,q,q,q,q,r,q,new V.az(0,0,0,0),q,q,q)
-p=Math.min(p,F.aK(a,!1).a.a*0.1)
+p=Math.min(p,F.aK(a,!1).a.a*0.05)
 return T.nM(H.d([s,r,M.bs(q,T.jh(L.k6("contact".toUpperCase(),A.dY(q,q,C.j,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q))),C.k,q,q,q,q,p,q,new V.az(0,0,0,0),q,q,q)],t.fQ),C.fI,C.pa,C.jG)},
 $S:291}
 D.u_.prototype={
